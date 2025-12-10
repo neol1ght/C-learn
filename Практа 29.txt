@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+class MyString {
+private:
+    string text;
+
+public:
+    // Конструктор здесь
+    MyString(string t = "") : text(t) {}
+
+    // Переопределение оператора + для подсчета слов
+    int operator + () {
+        int count = 0;
+        bool inWord = false;
+
+        for (char c : text) {
+            if (c != ' ' && c != '\t' && c != '\n') {
+                if (!inWord) {
+                    count++;
+                    inWord = true;
+                }
+            }
+            else {
+                inWord = false;
+            }
+        }
+        return count;
+    }
+
+    // Ввод строки
+    void input() {
+        cout << "Введите строку: ";
+        getline(cin, text);
+    }
+
+    // ВЫвод строки
+    void show() {
+        cout << "Строка: \"" << text << "\"" << endl;
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    MyString str;
+
+    str.input();
+
+    str.show();
+
+    // Используем оператор + для подсчета слов
+    int wordCount = +str;
+    cout << "Количество слов в строке: " << wordCount << endl;
+
+    return 0;
+}

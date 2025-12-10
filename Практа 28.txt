@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+class Complex {
+private:
+    double real;
+    double imag;
+
+public:
+    Complex() : real(0), imag(0) {}
+    Complex(double r, double i) : real(r), imag(i) {}
+
+    // Переопределение оператора вычитания
+    Complex operator - (const Complex& other) {
+        return Complex(real - other.real, imag - other.imag);
+    }
+
+    void show() {
+        cout << real;
+        if (imag >= 0) {
+            cout << " + " << imag << "i";
+        }
+        else {
+            cout << " - " << -imag << "i";
+        }
+    }
+};
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    double r1, i1, r2, i2;
+
+    cout << "Введите первое комплексное число:" << endl;
+    cout << "  Действительная часть: ";
+    cin >> r1;
+    cout << "  Мнимая часть: ";
+    cin >> i1;
+
+    cout << "\nВведите второе комплексное число:" << endl;
+    cout << "  Действительная часть: ";
+    cin >> r2;
+    cout << "  Мнимая часть: ";
+    cin >> i2;
+
+    Complex a(r1, i1);
+    Complex b(r2, i2);
+    Complex result = a - b;
+
+    cout << "\nРезультат вычитания: ";
+    result.show();
+
+    return 0;
+}

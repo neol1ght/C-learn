@@ -1,0 +1,59 @@
+#include <iostream>
+using namespace std;
+
+// Шаблонная функция для сортировки пузырьком
+template <typename T>
+void bubbleSort(T arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                // Меняем местами
+                T temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Шаблонная функция для вывода массива
+template <typename T>
+void printArray(T arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int size = 6;
+
+    // Целочисленный массив
+    int intArr[size];
+    cout << "Введите 6 целых чисел: ";
+    for (int i = 0; i < size; i++) {
+        cin >> intArr[i];
+    }
+
+    // Символьный массив
+    char charArr[size];
+    cout << "Введите 6 символов (через пробел): ";
+    for (int i = 0; i < size; i++) {
+        cin >> charArr[i];
+    }
+
+    cout << "\nЦелочисленный массив до сортировки: ";
+    printArray(intArr, size);
+    bubbleSort(intArr, size);
+    cout << "Целочисленный массив после сортировки: ";
+    printArray(intArr, size);
+
+    cout << "\nСимвольный массив до сортировки: ";
+    printArray(charArr, size);
+    bubbleSort(charArr, size);
+    cout << "Символьный массив после сортировки: ";
+    printArray(charArr, size);
+
+    return 0;
+}
