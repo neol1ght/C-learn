@@ -1,0 +1,33 @@
+#include <iostream>
+#include <chrono>
+using namespace std;
+using namespace chrono;
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    const int N = 1000;
+    float* a = new float[N];
+    srand(time(0));
+
+    // Заполнение
+    for (int i = 0; i < N; i++)
+        a[i] = (float)rand() / RAND_MAX;
+
+    // Сортировка пузырьком
+    auto start = high_resolution_clock::now();
+
+    for (int i = 0; i < N - 1; i++)
+        for (int j = 0; j < N - i - 1; j++)
+            if (a[j] > a[j + 1])
+                swap(a[j], a[j + 1]);
+
+    auto end = high_resolution_clock::now();
+
+    // Результат
+    cout << "Время: "
+        << duration_cast<milliseconds>(end - start).count()
+        << " мс" << endl;
+
+    delete[] a;
+    return 0;
+}

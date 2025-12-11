@@ -1,0 +1,74 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <vector>
+
+using namespace std;
+
+// 5.2-5.3: Возведение в степень
+void testPower() {
+    cout << "\n1. Возведение в степень:" << endl;
+
+    double a, b;
+    cout << "Основание: ";
+    cin >> a;
+    cout << "Степень: ";
+    cin >> b;
+
+    if (b < 0 && a != floor(a)) {
+        cout << "Ошибка: нецелое число в отрицательной степени!" << endl;
+        return;
+    }
+
+    cout << "Результат: " << pow(a, b) << endl;
+}
+
+// 5.4: Чтение из файла и деление
+void testFileDivision() {
+    cout << "\n2. Деление чисел из файла:" << endl;
+
+    string filename;
+    cout << "Имя файла: ";
+    cin >> filename;
+
+    ifstream file(filename);
+    if (!file) {
+        cout << "Ошибка: файл не найден!" << endl;
+        return;
+    }
+
+    vector<int> nums;
+    int num;
+    while (file >> num) {
+        nums.push_back(num);
+    }
+
+    if (nums.size() < 2) {
+        cout << "Ошибка: нужно минимум 2 числа!" << endl;
+        return;
+    }
+
+    if (nums[1] == 0) {
+        cout << "Ошибка: деление на 0!" << endl;
+        return;
+    }
+
+    cout << nums[0] << " / " << nums[1] << " = "
+        << (double)nums[0] / nums[1] << endl;
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian");
+    int choice;
+
+    do {
+        cout << "\nМеню:\n1. Возведение в степень\n2. Деление из файла\n0. Выход\nВыбор: ";
+        cin >> choice;
+
+        if (choice == 1) testPower();
+        else if (choice == 2) testFileDivision();
+
+    } while (choice != 0);
+
+    return 0;
+}
